@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-producer
+spec:
+  selector:
+    matchLabels:
+      app: quote-producer
+  template:
+    metadata:
+      labels:
+        app: quote-producer
+    spec:
+      containers:
+      - name: quote-producer
+        image: quote-producer
+        imagePullPolicy: Never # RUNNING IN KIND :)
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - name: http
+          containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quote-producer-svc
+spec:
+  selector:
+    app: quote-producer
+  ports:
+  - name: http
+    port: 3000
+    targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quoter
+spec:
+  selector:
+    matchLabels:
+      app: quoter
+  template:
+    metadata:
+      labels:
+        app: quoter
+    spec:
+      containers:
+      - name: quoter
+        image: quoter
+        imagePullPolicy: Never # RUNNING IN KIND :)
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - name: http
+          containerPort: 3000
+        env:
+          - name: QUOTE_PRODUCER_HOST
+            value: "http://quote-producer-svc:3000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quoter
+spec:
+  selector:
+    app: quoter
+  ports:
+  - name: http
+    port: 3000
+    targetPort: http

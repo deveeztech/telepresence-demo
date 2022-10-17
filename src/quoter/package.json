@@ -1,0 +1,14 @@
+{
+  "name": "quoter",
+  "version": "1.0.0",
+  "description": "This service connects to quote-producer and returns the quote.",
+  "author": "devxp talk <talks@devxp.tech>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^3.2.10"
+  }
+}

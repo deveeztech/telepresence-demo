@@ -1,0 +1,17 @@
+{
+  "name": "quote-producer",
+  "version": "1.0.0",
+  "description": "This service produces a random quote everytime it gets called",
+  "author": "devxp talk <talks@devxp.tech>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "nodemon"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.20"
+  }
+}
