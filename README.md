@@ -11,7 +11,7 @@ https://www.getambassador.io/docs/telepresence/latest/howtos/intercepts/
 
 0. We'll need a cluster to connect to:
 ```bash
-$ kind create --name telepresence-demo
+$ kind create cluster --name telepresence-demo
 ```
 
 1. Install telepresence
